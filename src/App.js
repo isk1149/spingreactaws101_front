@@ -7,6 +7,19 @@ import AddTodo from './AddTodo';
 function App() {
   const [items, setItems] = useState([]);
 
+  useEffect(()=>{ //useEffect 덕분에 무한을 막을 수 있음
+  const requestOptions = {
+    method:"GET",
+    headers:{"Content-Type":"application/json"},
+  };
+
+  fetch("http://localhost:8080/todo", requestOptions)
+  .then(response => response.json())
+  .then(
+    response => {setItems(response.data);},
+    error=>{}
+    );},[]);
+
   const addItem = (item) => {
     item.id = "ID-" + items.length;
     item.done = "false";
@@ -35,7 +48,7 @@ function App() {
     </Paper>
   );
 
-  useEffect(()=>{console.log("items: ", items)}, [items]);
+  //useEffect(()=>{console.log("items: ", items)}, [items]);
 
   return (
     <div className="App">
