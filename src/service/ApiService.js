@@ -12,7 +12,7 @@ export const call = (api, method, request) => {
         //GET method
         options.body = JSON.stringify(request);
     }
-    return fetch(optinos.url, options).then(response => {
+    return fetch(options.url, options).then(response => {
         if (response.status === 200) {
             return response.json();
         }
